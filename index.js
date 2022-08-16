@@ -1,1 +1,1 @@
-alert("Olá mundo")
+let user = new UserController('form-user-create', 'table-users');
