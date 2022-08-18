@@ -191,18 +191,8 @@ class UserController {
     );
   }
 
-  getUserStorage() {
-    let users = [];
-
-    if (localStorage.getItem("users")) {
-      users = JSON.parse(localStorage.getItem("users"));
-    }
-
-    return users;
-  }
-
   selectAllStorage() {
-    let users = this.getUserStorage();
+    let users = User.getUserStorage();
     users.forEach((data) => {
       let user = new User();
 
@@ -248,6 +238,9 @@ class UserController {
   addEventTr(tr) {
     tr.querySelector(".btn-delete").addEventListener("click", (e) => {
       if (confirm("Deseja Realmente EXCLUIR este USUARIO??")) {
+        let user = new User();
+        user.loadFromJSON(JSON.parse(tr.dataset.user));
+        user.removeUsersStrore();
         tr.remove();
         this.updateCount();
       }
